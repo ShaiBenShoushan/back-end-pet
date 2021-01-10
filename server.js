@@ -18,6 +18,9 @@ app.use(cookieParser());
 app.use(cors());
 app.use('/api/pets', petsRouter);
 app.use('/api', usersRouter);
+app.get("/", (req, res) => {
+    res.send("UP AND RUNING");
+});
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
