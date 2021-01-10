@@ -26,7 +26,6 @@ class Mongo {
             const item = await this.usersCollection.findOne({ email });
             return item;
         } catch (e) {
-            console.log(e);
         }
     }
     async findUserById(userId) {
@@ -35,7 +34,6 @@ class Mongo {
 
             return item;
         } catch (e) {
-            console.log(e);
         }
     }
 
@@ -95,6 +93,12 @@ class Mongo {
         try {
             const filter = { _id: ObjectID(petId) };
             const update = { $push: { savedBy: ObjectID(userId) } };
+            const updatedToSend = await this.petsCollection.findOne({
+                _id: ObjectID(petId)
+            })
+            if(updatedToSend){
+                return "Already saved";
+            }
             const updated = await this.petsCollection.updateOne(filter, update);
             const updatedToSend = await this.petsCollection.findOne({
                 _id: ObjectID(petId)

@@ -26,11 +26,8 @@ async function addNewMongoUser(req, res, next) {
         res.json("Successfully Registered");
       }
       else {
-        res.status(400).json("emmail already exists");
+        res.status(400).json("Email already exists");
       }
-    }
-    else {
-      console.log("input not good");
     }
   } catch (e) {
 
